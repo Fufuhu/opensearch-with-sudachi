@@ -1,7 +1,7 @@
 # opensearch-with-sudachi
 OpenSearch with analyser-sudachi
 
-[OpenSearch](https://opensearch.org/)のDocker版を使って、[WorksApplications/elasticsearch-sudachi](https://github.com/WorksApplications/elasticsearch-sudachi)を利用するためのサンpルウです。
+[OpenSearch](https://opensearch.org/)のDocker版を使って、[WorksApplications/elasticsearch-sudachi](https://github.com/WorksApplications/elasticsearch-sudachi)を利用するためのサンプルです。
 
 # 利用方法
 
