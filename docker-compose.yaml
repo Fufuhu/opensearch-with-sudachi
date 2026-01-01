@@ -1,0 +1,30 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch:2.18.0
+    container_name: opensearch_kokuzei
+    restart: always
+    environment:
+      discovery.type: single-node
+      plugins.security.disabled: "true"
+      # bootstrap.memory_lock: "true"
+      OPENSEARCH_JAVA_OPTS: "-Xms1024m -Xmx1024m"
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: "OpenSearch#1"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    volumes:
+      - data:/usr/share/opensearch/data
+      - ./sudachi:/usr/share/opensearch/config/sudachi
+    command: >
+      bash -c "
+        /usr/share/opensearch/bin/opensearch-plugin install --batch https://github.com/WorksApplications/elasticsearch-sudachi/releases/download/v3.3.0/opensearch-2.18.0-analysis-sudachi-3.3.0.zip &&
+        /usr/share/opensearch/bin/opensearch-plugin install  --batch analysis-icu &&
+        ./opensearch-docker-entrypoint.sh
+      "
+volumes:
+  data:
+    driver: local
